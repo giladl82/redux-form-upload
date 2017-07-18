@@ -1,17 +1,34 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import logo from './logo.svg'
 
 import Form from '../Form'
 
 import './App.scss'
 
+import { uploadFile } from '../utils/uploader'
+
 class App extends Component {
   constructor (props) {
     super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.files = []
   }
-  handleSubmit (values) {
-    alert(JSON.stringify(values))
+
+  handleSubmit = (values) => {
+    if (this.files && this.files.length) {
+      let file = this.files.pop()
+      uploadFile(file.file)
+        .then((uploaded) => {
+          Object.assign(values, { [file.fieldName]: uploaded })
+          alert(JSON.stringify(values))
+        })
+    } else {
+      alert(JSON.stringify(values))
+    }
+  }
+
+  handleFileChange = (file, fieldName) => {
+    this.files.push({'fieldName': fieldName, file})
   }
 
   render () {
@@ -22,11 +39,15 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <section className='App-intro'>
-          <Form onSubmit={this.handleSubmit} />
+          <Form onSubmit={this.handleSubmit} onFileChange={this.handleFileChange} />
         </section>
       </div>
     )
   }
+}
+
+App.propTypes = {
+  change: PropTypes.func
 }
 
 export default App

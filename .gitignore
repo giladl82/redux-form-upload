@@ -6,5 +6,4 @@ build/**/
 *bundle*
 *npm-debug.log
 .DS_Store
-uploads/
-saved/
+temp_uploads/

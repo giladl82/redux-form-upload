@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 const upload = multer({
-  dest: 'uploads/'
+  dest: 'temp_uploads/'
 })
 
 app
@@ -47,16 +47,13 @@ app
     res.render('index.ejs', { appBody, preloadedStateScript })
   })
   .post('/', upload.single('file'), (req, res) => {
-    console.log(req.body)
-    console.log(req.file)
-
     const uploadedTo = path.resolve(__dirname, '../..', req.file.destination, req.file.filename)
-    const saveTo = path.resolve(__dirname, '../../saved', req.file.originalname)
+    const saveTo = path.resolve(__dirname, '../../uploads', req.file.originalname)
 
     fs.createReadStream(uploadedTo).pipe(fs.createWriteStream(saveTo))
     fs.unlink(uploadedTo)
 
-    res.send('ok')
+    res.send(uploadedTo)
   })
 
 app.listen(8888, () => {
