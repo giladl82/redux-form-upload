@@ -1,0 +1,10 @@
+node_modules/
+build/
+build/public/
+build/**/
+*bundle.js
+*bundle*
+*npm-debug.log
+.DS_Store
+uploads/
+saved/
