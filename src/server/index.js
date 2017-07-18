@@ -11,7 +11,6 @@ import App from '../client/App'
 import configureStore from '../client/store'
 
 import fs from 'fs'
-import writeFile from 'write'
 
 const ejsExpress = ejs.__express
 
@@ -54,14 +53,12 @@ app
     const uploadedTo = path.resolve(__dirname, '../..', req.file.destination, req.file.filename)
     const saveTo = path.resolve(__dirname, '../../saved', req.file.originalname)
 
-    fs.createReadStream(uploadedTo).pipe(fs.createWriteStream(saveTo));
+    fs.createReadStream(uploadedTo).pipe(fs.createWriteStream(saveTo))
     fs.unlink(uploadedTo)
 
     res.send('ok')
   })
 
-
-
-app.listen(8000, () => {
-  console.log('App is running on PORT 8000')
+app.listen(8888, () => {
+  console.log('App is running on PORT 8888')
 })

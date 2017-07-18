@@ -10,7 +10,7 @@ const store = configureStore(preloadedState)
 
 const ClientApp = () => (
   <Provider store={store}>
-      <App />
+    <App />
   </Provider>
 )
 

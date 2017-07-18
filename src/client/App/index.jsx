@@ -1,33 +1,32 @@
-import React, { Component } from 'react';
-import {findDOMNode} from 'react-dom'
-import logo from './logo.svg';
+import React, { Component } from 'react'
+import logo from './logo.svg'
 
 import Form from '../Form'
 
-import './App.scss';
+import './App.scss'
 
 class App extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  handleSubmit(values) {
+  handleSubmit (values) {
     alert(JSON.stringify(values))
   }
 
-  render() {
+  render () {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+      <div className='App'>
+        <div className='App-header'>
+          <img src={logo} className='App-logo' alt='logo' />
           <h2>Welcome to React</h2>
         </div>
-        <section className="App-intro">
+        <section className='App-intro'>
           <Form onSubmit={this.handleSubmit} />
         </section>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
